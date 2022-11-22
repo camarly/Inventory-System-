@@ -1,0 +1,123 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Report2`()
+BEGIN
+SELECT Item.ItemID, Item.ItemDescription, SUM(OrderItems.QuantitySold) As QTYSOLD, SUM(OrderItems.TotalSalePrice) TotalSaleAmntPerItem
+FROM ThomasHardware.Item
+INNER JOIN ThomasHardware.OrderItems
+ON Item.ItemID = OrderItems.ItemID
+GROUP BY Item.ItemID;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addItem`(IN itemID VARCHAR(9), IN descr VARCHAR(32), IN qty INT, IN pPrice Double(9,2), IN sPrice Double(9,2), IN uStock Double(9,2))
+BEGIN
+	INSERT INTO Item
+    VALUES(itemID, descr, qty, pPrice, sPrice, uStock);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addSaleOrder`(IN cxID INT(7))
+BEGIN
+INSERT INTO `SaleOrder`(`CustomerID`)
+VALUES (
+	(cxID)
+);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `changePWD`(IN uname VARCHAR(9), IN upass VARCHAR(32), IN ans VARCHAR(32))
+BEGIN
+	UPDATE Passwords
+    SET Pwd = upass
+    WHERE UserID = uname AND ans = Answer;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getItemInfo`(IN item VARCHAR(9))
+BEGIN
+	SELECT *
+    FROM Item
+    WHERE ItemID = item;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getItemPrice`(IN item VARCHAR(9), IN qty INT)
+BEGIN
+	SELECT TotalInStock
+    FROM Item
+    WHERE ItemID = item;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getSaleID`()
+BEGIN
+(SELECT LAST_INSERT_ID());
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getUserInfo`(IN uname VARCHAR(10), IN upass VARCHAR(32))
+BEGIN
+	SELECT 
+    IF((uname = UserID AND upass = Pwd), "TRUE", "FALSE")
+    FROM Passwords
+	WHERE uname = UserID;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getUserUserID`(IN uname VARCHAR(10), IN upass VARCHAR(32))
+BEGIN
+	SELECT 
+    IF((uname = UserID AND upass = Pwd), "TRUE", "FALSE")
+    FROM Passwords
+	WHERE uname = UserID;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `makeSale`(IN id INT, IN item VARCHAR(7), IN qty INT, IN total double(9,2), IN pDate Date)
+BEGIN
+INSERT INTO `OrderItems`(`OrderSaleID`, `ItemID`, `QuantitySold`, `TotalSalePrice`, `purchaseDate`)
+VALUES 
+	(id, item, qty, total, pDate);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateItem`(IN itemID VARCHAR(9), IN descr VARCHAR(32), IN qty INT, IN pPrice Double(9,2), IN sPrice Double(9,2), IN uStock Double(9,2))
+BEGIN
+	UPDATE Item
+    SET
+    TotalInStock = qty,
+    UnitPurchasePrice = pPrice,
+    UnitSalePrice = sPrice,
+    UnderStockValue = uStock
+    WHERE ItemID = itemID;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `userExists`(IN uname VARCHAR(9))
+BEGIN
+	SELECT UserID 
+    FROM Passwords
+    WHERE UserID = uname;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `userExists2`(IN uname VARCHAR(9))
+BEGIN
+	SELECT *
+    FROM Users
+    WHERE UserID = uname;
+END$$
+DELIMITER ;
+

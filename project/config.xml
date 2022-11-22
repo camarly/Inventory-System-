@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>/Users/cloud/programming/java/ITT303/project/dist/project.jar</jar>
+  <outfile>/Users/cloud/programming/java/ITT303/project/dist/mihawk.exe</outfile>
+  <errTitle>Java is not installed on you system. Please install Java 16 SDK JDK</errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>/Users/cloud/Downloads/hawk_256.ico</icon>
+  <singleInstance>
+    <mutexName>Mihawk Inventory Sales</mutexName>
+    <windowTitle>Mihawk Inventory Sales</windowTitle>
+  </singleInstance>
+  <jre>
+    <path></path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>1.8.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.0.0.0</fileVersion>
+    <txtFileVersion>1.0.0.0</txtFileVersion>
+    <fileDescription>Mihawk Inventory Management and Sales Software</fileDescription>
+    <copyright>NIL Camarly Thomas 2021</copyright>
+    <productVersion>1.0.0.0</productVersion>
+    <txtProductVersion>1.0.0.0</txtProductVersion>
+    <productName>Mihawk Inventory Management and Sales Software</productName>
+    <companyName>Camarly Thomas@UCC</companyName>
+    <internalName>Camarly Thomas@UCC</internalName>
+    <originalFilename>mihawk.exe</originalFilename>
+    <trademarks></trademarks>
+    <language>ENGLISH_UK</language>
+  </versionInfo>
+</launch4jConfig>
